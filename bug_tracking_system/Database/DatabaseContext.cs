@@ -12,17 +12,14 @@ namespace bug_tracking_system.Database
             
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            // connect to sql server with connection string from app settings
-         
+            base.OnModelCreating(builder);
         }
 
         public DbSet<Project> Projects { get; set; }
         public DbSet<Bug> Bugs { get; set; }
-        public DbSet<Priority> Priorities { get; set; }
-        public DbSet<Severity> Severities { get; set; }
-        public DbSet<Status> Status { get; set; }
+ 
 
 
     }

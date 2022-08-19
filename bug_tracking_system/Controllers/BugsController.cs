@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using bug_tracking_system.Database;
 using bug_tracking_system.Models;
+using AutoMapper;
 
 namespace bug_tracking_system.Controllers
 {
@@ -15,11 +16,15 @@ namespace bug_tracking_system.Controllers
     public class BugsController : ControllerBase
     {
         private readonly DatabaseContext _context;
+        private readonly IMapper _mapper;
 
-        public BugsController(DatabaseContext context)
+        public BugsController(DatabaseContext context , IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
+
         }
+        
 
         // GET: api/Bugs
         [HttpGet]
@@ -29,7 +34,8 @@ namespace bug_tracking_system.Controllers
           {
               return NotFound();
           }
-            return await _context.Bugs.ToListAsync();
+            return Ok(_context.Bugs.Select(bug => _mapper.Map<BugDto>(bug)));
+          //  return await  _context.Bugs.ToListAsync();
         }
 
         // GET: api/Bugs/5
@@ -84,8 +90,10 @@ namespace bug_tracking_system.Controllers
         // POST: api/Bugs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Bug>> PostBug(Bug bug)
+        public async Task<ActionResult<Bug>> PostBug(Bug newbug)
         {
+            var bug = _mapper.Map<Bug>(newbug);
+
           if (_context.Bugs == null)
           {
               return Problem("Entity set 'DatabaseContext.Bugs'  is null.");

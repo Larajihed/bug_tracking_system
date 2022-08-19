@@ -1,9 +1,13 @@
 ﻿namespace bug_tracking_system.Models
+
 {
-    public class Status
+    public enum Status
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
+
+      Open = 1,
+      Assigned = 2,
+      Test=3,
+      Verified=4,
+      Closed=5
     }
 }
