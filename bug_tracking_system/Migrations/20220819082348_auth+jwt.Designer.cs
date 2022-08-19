@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using bug_tracking_system.Database;
 
@@ -11,9 +12,10 @@ using bug_tracking_system.Database;
 namespace bug_tracking_system.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220819082348_auth+jwt")]
+    partial class authjwt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +64,7 @@ namespace bug_tracking_system.Migrations
 
                     b.HasKey("BugId");
 
-                    b.ToTable("Bugs", (string)null);
+                    b.ToTable("Bugs");
                 });
 
             modelBuilder.Entity("bug_tracking_system.Models.Project", b =>
@@ -83,7 +85,7 @@ namespace bug_tracking_system.Migrations
 
                     b.HasKey("ProjectId");
 
-                    b.ToTable("Projects", (string)null);
+                    b.ToTable("Projects");
                 });
 #pragma warning restore 612, 618
         }

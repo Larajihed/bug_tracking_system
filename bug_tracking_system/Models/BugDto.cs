@@ -1,14 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace bug_tracking_system.Models
+﻿namespace bug_tracking_system.Models
 {
-    public class Bug
+    public class BugDto
     {
-        [Key]
-        public int BugId { get; set; }
-        [ForeignKey("Project")]
-        public int ProjectId { get; set; }
+        public Project Project { get; set; }
         public string? BugDescription { get; set; }
         public DateTime? CreationDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
@@ -18,8 +12,5 @@ namespace bug_tracking_system.Models
         public Severities Severity { get; set; }
         public Status BugStatus { get; set; }
         public Priorities Priority { get; set; }
-
-
-
     }
 }
